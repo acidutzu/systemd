@@ -1,0 +1,20 @@
+#### copy this file in /lib/systemd/system and sudo chmod 644 the file
+
+#### copy start-stop-scripts into /usr/local/bin and sudo chmod +x them
+#### run sudo systemctl enable pythonhttp
+
+[Unit]
+Description=pythonhttp server daemon
+Documentation=http://g00gle.com
+After=network.target syslog.target
+
+[Service]
+# see man systemd.service 
+Type=oneshot
+ExecStart=/usr/local/bin/pythonhttp-start.sh
+RemainAfterExit=true
+ExecStop=/usr/local/bin/pythonhttp-stop.sh
+StandardOutput=journal
+
+[Install]
+WantedBy=multi-user.target 
